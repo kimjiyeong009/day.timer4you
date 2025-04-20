@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디데이 계산기</title>
+</head>
+<body>
+    <h1>디데이 계산기</h1>
+
+    <!-- 제목 입력란 -->
+    <label for="title">제목:</label>
+    <input type="text" id="title" placeholder="제목을 입력하세요">
+
+    <!-- 날짜 선택 버튼 -->
+    <div>
+        <label for="eventType">이벤트 종류:</label>
+        <select id="eventType">
+            <option value="birthday">생일</option>
+            <option value="love">사랑</option>
+        </select>
+    </div>
+
+    <!-- 날짜 입력란 -->
+    <label for="date">날짜:</label>
+    <input type="date" id="date">
+
+    <button onclick="calculateDday()">디데이 계산하기</button>
+
+    <p id="result"></p>
+
+    <script>
+        function calculateDday() {
+            const title = document.getElementById('title').value;
+            const eventType = document.getElementById('eventType').value;
+            const inputDate = new Date(document.getElementById('date').value);
+
+            const currentDate = new Date();
+            let eventDate;
+
+            // 이벤트 종류에 따라 날짜 설정
+            if (eventType === 'birthday') {
+                eventDate = new Date(inputDate);
+            } else if (eventType === 'love') {
+                // 사랑 이벤트: 첫날을 1일째로 설정
+                eventDate = new Date(inputDate);
+            }
+
+            const timeDifference = eventDate - currentDate;
+            const daysLeft = Math.ceil(timeDifference / (1000 * 3600 * 24));
+
+            // 디데이 결과 출력
+            document.getElementById('result').textContent = `${title}까지 ${daysLeft}일 남았습니다.`;
+        }
+    </script>
+</body>
+</html>
